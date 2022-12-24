@@ -6,10 +6,15 @@ import { Button } from "@mui/material";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockIcon from "@mui/icons-material/Lock";
 import Link from "@mui/material/Link";
+
 const SignIn = ({ login }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  console.log(email);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({ email, password });
+    
+  };
   return (
     <Box
       sx={{
@@ -20,10 +25,7 @@ const SignIn = ({ login }) => {
       }}
     >
       <Box sx={{ my: 2 }}>
-        <FormControl
-          variant="standard"
-          onSubmit={() => login({ email, password })}
-        >
+        <form onSubmit={handleSubmit}>
           <Box sx={{ display: "flex", alignItems: "flex-end", my: 2 }}>
             <MailOutlineIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
             <TextField
@@ -53,12 +55,13 @@ const SignIn = ({ login }) => {
             />
           </Box>
           <Button
+            type="submit"
             sx={{ my: 3, boxShadow: "1px 2px 9px #1976D2" }}
             variant="contained"
           >
             Đăng nhập
           </Button>
-        </FormControl>
+        </form>
       </Box>
 
       <Link

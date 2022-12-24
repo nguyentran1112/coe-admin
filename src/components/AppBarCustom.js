@@ -1,23 +1,31 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-
-import img from '../constants/index'
-const pages = ['Đơn bảo trì', 'Nhân viên', 'Khách hàng', 'Tài chính'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { useNavigate } from "react-router-dom";
+import { logout } from "../redux/auth";
+import img from "../constants/index";
+import { useDispatch} from "react-redux";
+const pages = [
+  { title: "Đơn bảo trì", location: "/" },
+  { title: "Khách hàng", location: "/" },
+  { title: "Nhân viên", location: "/Employee" },
+  { title: "Tài chính", location: "/report" },
+];
+const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function AppBarCustom() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,6 +43,27 @@ function AppBarCustom() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logout());
+  }
+  const handleSettings = (item) => {
+    switch (item) {
+      case "Logout":
+        var token = localStorage.getItem("persist:root");
+        console.log(JSON.parse(JSON.parse(token).auth).token)
+        alert("Bạn sẽ đăng xuất khỏi hệ thống");
+        //logOut(JSON.parse(JSON.parse(token).auth).token)
+        logOut();
+        if (!localStorage.getItem("persist:root")) {
+          navigate("/");
+        }
+        break;
+      case "Dashboard":
+        navigate("/dashBoard");
+        break;
+    }
+  };
 
   return (
     <AppBar position="static">
@@ -47,23 +76,23 @@ function AppBarCustom() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             <img
-              alt='logo'
+              alt="logo"
               src={img.logoCOE}
-              style={{ width: 50, height: 50}}
+              style={{ width: 50, height: 50 }}
               loading="lazy"
             />
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -78,23 +107,33 @@ function AppBarCustom() {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem
+                  key={page.title}
+                  component={Link}
+                  to={page.location}
+                  onClick={handleCloseNavMenu}
+                >
+                  <Typography
+                    onClick={() => handleSettings(page.title)}
+                    textAlign="center"
+                  >
+                    {page.title}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -107,30 +146,32 @@ function AppBarCustom() {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             <img
-              alt='logo'
+              alt="logo"
               src={img.logoCOE}
               style={{ width: 45, height: 45 }}
               loading="lazy"
             />
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                component={Link}
+                to={page.location}
+                key={page.title}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.title}
               </Button>
             ))}
           </Box>
@@ -142,23 +183,23 @@ function AppBarCustom() {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => handleSettings(setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

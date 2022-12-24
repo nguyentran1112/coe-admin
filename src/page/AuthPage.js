@@ -2,7 +2,15 @@ import * as React from "react";
 import Lottie from "lottie-react";
 import img from "../constants";
 import { Auth } from "../components/Form/Auth";
-const AuthPage = () => {
+import { useNavigate } from "react-router-dom";
+const AuthPage = ({ auth }) => {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    if (auth.token) {
+      console.log(auth)
+      navigate("/dashBoard");
+    }
+  }, [JSON.stringify(auth)]);
   return (
     <>
       <div
@@ -13,13 +21,18 @@ const AuthPage = () => {
           justifyContent: "center",
           height: "100vh",
           zIndex: 1,
-          flexDirection: 'column'
+          flexDirection: "column",
         }}
       >
         <img
-          alt='logo'
+          alt="logo"
           src={img.logoCOE}
-          style={{ width: 100, height: 100, boxShadow: '1px 2px 9px #77E9EA', borderRadius: '50%' }}
+          style={{
+            width: 100,
+            height: 100,
+            boxShadow: "1px 2px 9px #77E9EA",
+            borderRadius: "50%",
+          }}
           loading="lazy"
         />
         <Auth />

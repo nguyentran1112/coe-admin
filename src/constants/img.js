@@ -11,4 +11,5 @@ export default {
   client: require("../assets/client.json"),
   money: require("../assets/money.json"),
   rate: require("../assets/rating.json"),
+  loading: require("../assets/loading.json")
 };

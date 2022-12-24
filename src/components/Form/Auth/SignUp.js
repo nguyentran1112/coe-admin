@@ -20,7 +20,7 @@ const SignUp = () => {
       }}
     >
       <Box>
-        <FormControl variant="standard">
+        <form>
           <Box sx={{ display: "flex", alignItems: "flex-end", my: 2 }}>
             <AccountCircleIcon
               sx={{ color: "action.active", mr: 1, my: 0.5 }}
@@ -67,7 +67,7 @@ const SignUp = () => {
           >
             Đăng ký tài khoản
           </Button>
-        </FormControl>
+        </form>
       </Box>
     </Box>
   );
