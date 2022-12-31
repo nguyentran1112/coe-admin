@@ -18,8 +18,8 @@ import img from "../constants/index";
 import { useDispatch} from "react-redux";
 const pages = [
   { title: "Đơn bảo trì", location: "/" },
-  { title: "Khách hàng", location: "/" },
-  { title: "Nhân viên", location: "/Employee" },
+  { title: "Khách hàng", location: "/client" },
+  { title: "Nhân viên", location: "/employee" },
   { title: "Tài chính", location: "/report" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -46,15 +46,20 @@ function AppBarCustom() {
   const dispatch = useDispatch();
   const logOut = () => {
     dispatch(logout());
+    localStorage.removeItem("persist:root");
+      
+
   }
   const handleSettings = (item) => {
     switch (item) {
       case "Logout":
-        var token = localStorage.getItem("persist:root");
-        console.log(JSON.parse(JSON.parse(token).auth).token)
+        
+        //
+        //console.log(JSON.parse(JSON.parse(token).auth).token)
         alert("Bạn sẽ đăng xuất khỏi hệ thống");
         //logOut(JSON.parse(JSON.parse(token).auth).token)
         logOut();
+        //console.log(localStorage.getItem("persist:root"))
         if (!localStorage.getItem("persist:root")) {
           navigate("/");
         }

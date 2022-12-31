@@ -7,7 +7,7 @@ const AuthPage = ({ auth }) => {
   const navigate = useNavigate();
   React.useEffect(() => {
     if (auth.token) {
-      console.log(auth)
+      //console.log(auth)
       navigate("/dashBoard");
     }
   }, [JSON.stringify(auth)]);

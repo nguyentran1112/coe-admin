@@ -2,7 +2,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid"; // Grid version 1
 import AppBarCustom from "../components/AppBarCustom";
 import { DataGrid } from "@mui/x-data-grid";
-import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 import { getAllEmp } from "../redux/employee";
 import { useDispatch } from "react-redux";
 
@@ -28,16 +28,13 @@ const columns = [
 ];
 
 
-const Employee = ({employee}) => {
+const Client = () => {
   const [employeeList, setEmployeeList] = React.useState([]);
   const dispatch = useDispatch();
-  
   var data = localStorage.getItem("persist:root");
-  var token = JSON.parse(JSON.parse(data).auth).token;
-  console.log(token)
-  var listEmployee = employee.listEmployee;
+  var listEmployee = JSON.parse(JSON.parse(data).employee).listEmployee;
   React.useEffect(() => {
-    dispatch(getAllEmp({token}));
+    dispatch(getAllEmp());
     setEmployeeList(listEmployee.map((employee) => {
       return({
         username: employee.username,
@@ -48,14 +45,14 @@ const Employee = ({employee}) => {
       });
     }));
     
-  },[JSON.stringify(listEmployee)]);
+  },[]);
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />
       <div style={{ margin: 16 }}>
         <div style={styleTitle}>
-          <SupervisedUserCircleIcon></SupervisedUserCircleIcon>
-          <div style={styleTextTitle}>Giám sát, quản lý nhân viên</div>
+          <ContactPageIcon/>
+          <div style={styleTextTitle}>Danh sách khách hàng</div>
         </div>
       </div>
       <div
@@ -78,7 +75,7 @@ const Employee = ({employee}) => {
     </div>
   );
 };
-export default Employee;
+export default Client;
 
 const styleTitle = {
   fontSize: 20,

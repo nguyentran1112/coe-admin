@@ -19,10 +19,16 @@ const employee = createSlice({
 const { getAllEmployeeSuccess } = employee.actions;
 
 export const getAllEmp =
-  () =>
+  ({token}) =>
   async (dispatch) => {
     const res = await axios.get(
-      "https://coe-five.vercel.app/v1/employee/getAllEmployee"
+      "https://coe-five.vercel.app/v1/employee/getAllEmployee",
+      {
+        headers: {
+          token: 'Bearer ' + token
+        }
+      }
+        
     );
     dispatch(getAllEmployeeSuccess(res.data));
     

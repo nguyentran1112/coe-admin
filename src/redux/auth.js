@@ -13,8 +13,10 @@ const auth = createSlice({
     },
     logoutSuccess(state, action) {
       state.token = null;
-      localStorage.removeItem("persist:root");
     },
+    registerSuccess(state, action) {
+      state.token = action.payload.accessToken;
+    }
   },
 });
 
