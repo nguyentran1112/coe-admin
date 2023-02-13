@@ -22,7 +22,7 @@ export const getAllEmp =
   ({token}) =>
   async (dispatch) => {
     const res = await axios.get(
-      "https://coe-five.vercel.app/v1/employee/getAllEmployee",
+      `${process.env.REACT_APP_API_ENDPOINT}/employee/getAllEmployee`,
       {
         headers: {
           token: 'Bearer ' + token

@@ -13,7 +13,6 @@ const SignIn = ({ login }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     login({ email, password });
-    
   };
   return (
     <Box

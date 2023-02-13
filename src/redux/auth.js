@@ -20,16 +20,34 @@ const auth = createSlice({
   },
 });
 
-const { loginSuccess, logoutSuccess } = auth.actions;
+const { loginSuccess, logoutSuccess, registerSuccess } = auth.actions;
 
+// export const resgister = ({email, password}) => {
+//   async (dispatch) => {
+//     try {
+//       const res = await axios.post({
+
+//       })
+//       dispatch(registerSuccess(re))
+//     }
+//     catch {
+
+//     }
+//   }
+// }
 export const login =
   ({ email, password }) =>
   async (dispatch) => {
-    const res = await axios.post(
-      "https://coe-five.vercel.app/v1/admin/loginAdmin",
-      { email, password }
-    );
-    dispatch(loginSuccess(res.data));
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_ENDPOINT}/admin/loginAdmin`,
+        { email, password }
+      );
+      dispatch(loginSuccess(res.data));
+    }
+    catch(err) {
+      console.log(err)
+    }
   };
 
 export const logout = () => async (dispatch) => {

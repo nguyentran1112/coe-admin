@@ -3,18 +3,13 @@ import AppBarCustom from "../components/AppBarCustom";
 import { DataGrid } from "@mui/x-data-grid";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import { getAllEmp } from "../redux/employee";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllMaintenance } from "../redux/maintenance ";
 
 const columns = [
-  { field: "username", headerName: "User name", width: 130 },
-  { field: "email", headerName: "Email", width: 180 },
-  { field: "phone", headerName: "Phone", width: 130 },
-  {
-    field: "sex",
-    headerName: "Sex",
-
-    width: 90,
-  },
+  { field: "date", headerName: "Date Time", width: 130 },
+  { field: "description", headerName: "Description", width: 180 },
+  { field: "startHour", headerName: "Start Hour", width: 130 },
   {
     field: "id",
     headerName: "ID",
@@ -27,34 +22,34 @@ const columns = [
 ];
 
 
-const Employee = ({employee}) => {
-  const [employeeList, setEmployeeList] = React.useState([]);
+const Maintenance  = ({maintenance}) => {
+  const [maintenanceList, setMaintenanceList] = React.useState([]);
   const dispatch = useDispatch();
-  
+  const selector = useSelector((state) => state)
+  console.log(selector)
   var data = localStorage.getItem("persist:root");
   var token = JSON.parse(JSON.parse(data).auth).token;
   console.log(token)
-  var listEmployee = employee.listEmployee;
+  var listMaintenance = maintenance.listMaintenance;
   React.useEffect(() => {
-    dispatch(getAllEmp({token}));
-    setEmployeeList(listEmployee.map((employee) => {
+    dispatch(getAllMaintenance({token}));
+    setMaintenanceList(listMaintenance.map((maintenance) => {
       return({
-        username: employee.username,
-        email: employee.email,
-        phone: employee.phone,
-        sex: employee.sex,
-        id: employee._id,
+        date: maintenance.date,
+        description: maintenance.description,
+        startHour: maintenance.startHour,
+        id: maintenance._id,
       });
     }));
     
-  },[JSON.stringify(listEmployee)]);
+  },[JSON.stringify(listMaintenance)]);
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />
       <div style={{ margin: 16 }}>
         <div style={styleTitle}>
           <SupervisedUserCircleIcon></SupervisedUserCircleIcon>
-          <div style={styleTextTitle}>Giám sát, quản lý nhân viên</div>
+          <div style={styleTextTitle}>Đơn bảo trì</div>
         </div>
       </div>
       <div
@@ -66,10 +61,10 @@ const Employee = ({employee}) => {
       >
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={employeeList}
+            rows={maintenanceList}
             columns={columns}
-            pageSize={employeeList.lengt5}
-            rowsPerPageOptions={[employeeList.length]}
+            pageSize={maintenanceList?.length}
+            rowsPerPageOptions={[maintenanceList?.length]}
             //checkboxSelection
           />
         </div>
@@ -77,7 +72,7 @@ const Employee = ({employee}) => {
     </div>
   );
 };
-export default Employee;
+export default Maintenance;
 
 const styleTitle = {
   fontSize: 20,

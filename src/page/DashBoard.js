@@ -3,8 +3,12 @@ import Grid from "@mui/material/Grid"; // Grid version 1
 import AppBarCustom from "../components/AppBarCustom";
 import ActionAreaCard from "../components/ActionAreaCard";
 import img from "../constants";
+import { useDispatch, useSelector } from 'react-redux'
+
 
 const Dashboard = () => {
+  const selector = useSelector((state) => state)
+  console.log(selector)
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />
@@ -13,21 +17,21 @@ const Dashboard = () => {
           <Grid item xs={6} md={2}>
             <ActionAreaCard
               title="Đơn bảo trì chưa xử lý"
-              quantity="1"
+              quantity={selector?.maintenance.listMaintenance.length}
               img={img.fix}
             />
           </Grid>
           <Grid item xs={6} md={2}>
             <ActionAreaCard
               title="Nhân viên hoạt động"
-              quantity="1"
+              quantity = {selector?.employee?.listEmployee.length}
               img={img.employeeImg}
             />
           </Grid>
           <Grid item xs={6} md={2}>
             <ActionAreaCard
               title="Khách hàng hoạt động"
-              quantity="1"
+              quantity = {selector?.client?.listClient.length}
               img={img.client}
             />
           </Grid>

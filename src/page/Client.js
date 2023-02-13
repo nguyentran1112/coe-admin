@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid"; // Grid version 1
 import AppBarCustom from "../components/AppBarCustom";
 import { DataGrid } from "@mui/x-data-grid";
 import ContactPageIcon from '@mui/icons-material/ContactPage';
-import { getAllEmp } from "../redux/employee";
+import { getAllClient } from "../redux/client";
 import { useDispatch } from "react-redux";
 
 const columns = [
@@ -28,24 +28,26 @@ const columns = [
 ];
 
 
-const Client = () => {
-  const [employeeList, setEmployeeList] = React.useState([]);
+const Client = ({client}) => {
+  const [clientList, setClientList] = React.useState([]);
   const dispatch = useDispatch();
   var data = localStorage.getItem("persist:root");
-  var listEmployee = JSON.parse(JSON.parse(data).employee).listEmployee;
+  var token = JSON.parse(JSON.parse(data).auth).token;
+  var listClient = client.listClient;
+  
   React.useEffect(() => {
-    dispatch(getAllEmp());
-    setEmployeeList(listEmployee.map((employee) => {
+    dispatch(getAllClient({token}));
+    setClientList(listClient.map((client) => {
       return({
-        username: employee.username,
-        email: employee.email,
-        phone: employee.phone,
-        sex: employee.sex,
-        id: employee._id,
+        username: client.username,
+        email: client.email,
+        phone: client.phone,
+        sex: client.sex,
+        id: client._id,
       });
     }));
     
-  },[]);
+  },[JSON.stringify(listClient)]);
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />
@@ -64,11 +66,10 @@ const Client = () => {
       >
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={employeeList}
+            rows={clientList}
             columns={columns}
-            pageSize={employeeList.length}
-            rowsPerPageOptions={[employeeList.length]}
-            //checkboxSelection
+            pageSize={5}
+            rowsPerPageOptions={[clientList.length]}
           />
         </div>
       </div>

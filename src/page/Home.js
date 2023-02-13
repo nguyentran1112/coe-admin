@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 import img from "../constants";
 import { Link } from "react-router-dom";
 
+
 const Home = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
   const breakpoint = 1200;

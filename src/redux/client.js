@@ -16,18 +16,23 @@ const client = createSlice({
   },
 });
 
-const { getAllClientSuccess } = employee.actions;
+const { getAllClientSuccess } = client.actions;
 
-export const getAllEmp =
-  () =>
+export const getAllClient =
+  ({token}) =>
   async (dispatch) => {
     const res = await axios.get(
-      "https://coe-five.vercel.app/v1/user/getAllUser"
+      `${process.env.REACT_APP_API_ENDPOINT}/user/getAlluser`,
+      {
+        headers: {
+          token: 'Bearer ' + token
+        }
+      }
+        
     );
     dispatch(getAllClientSuccess(res.data));
     
   };
-
 
 
 export default client.reducer;

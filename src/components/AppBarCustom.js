@@ -17,7 +17,7 @@ import { logout } from "../redux/auth";
 import img from "../constants/index";
 import { useDispatch} from "react-redux";
 const pages = [
-  { title: "Đơn bảo trì", location: "/" },
+  { title: "Đơn bảo trì", location: "/maintenance" },
   { title: "Khách hàng", location: "/client" },
   { title: "Nhân viên", location: "/employee" },
   { title: "Tài chính", location: "/report" },
