@@ -47,7 +47,7 @@ const Employee = ({employee}) => {
       });
     }));
     
-  },[JSON.stringify(listEmployee)]);
+  },[]);
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />

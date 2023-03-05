@@ -3,12 +3,11 @@ import Grid from "@mui/material/Grid"; // Grid version 1
 import AppBarCustom from "../components/AppBarCustom";
 import ActionAreaCard from "../components/ActionAreaCard";
 import img from "../constants";
-import { useDispatch, useSelector } from 'react-redux'
+import {useSelector} from 'react-redux'
 
 
 const Dashboard = () => {
   const selector = useSelector((state) => state)
-  console.log(selector)
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />

@@ -10,7 +10,7 @@ const client = createSlice({
   reducers: {
     getAllClientSuccess(state, action) {
       state.listClient = action.payload
-      console.log(state.listClient)
+    
     },
     
   },

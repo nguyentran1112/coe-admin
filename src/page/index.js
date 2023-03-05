@@ -5,4 +5,5 @@ import NotFound from "./NotFound";
 import Employee from "./Employee";
 import Client from "./Client";
 import Maintenance from "./Maintenance";
-export {Home, AuthPage, Dashboard, NotFound, Employee, Client, Maintenance}
+import MapPage from "./MapPage";
+export {Home, AuthPage, Dashboard, NotFound, Employee, Client, Maintenance, MapPage}

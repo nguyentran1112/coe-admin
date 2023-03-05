@@ -47,7 +47,7 @@ const Client = ({client}) => {
       });
     }));
     
-  },[JSON.stringify(listClient)]);
+  },[]);
   return (
     <div style={{ width: "100%" }}>
       <AppBarCustom />

@@ -3,10 +3,19 @@ import Lottie from "lottie-react";
 import img from "../constants";
 import { Auth } from "../components/Form/Auth";
 import { useNavigate } from "react-router-dom";
+import { getAllEmp } from "../redux/employee";
+import { useDispatch } from "react-redux";
+import { getAllMaintenance } from "../redux/maintenance ";
+import { getAllClient } from "../redux/client";
 const AuthPage = ({ auth }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   React.useEffect(() => {
+    const token = auth.token
     if (auth.token) {
+      dispatch(getAllEmp({token}));
+      dispatch(getAllMaintenance({token}));
+      dispatch(getAllClient({token}));
       navigate("/dashBoard");
     }
   }, [JSON.stringify(auth)]);
