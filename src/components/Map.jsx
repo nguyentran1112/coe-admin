@@ -1,12 +1,12 @@
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import React from "react";
 import "leaflet/dist/leaflet.css";
-import RoomIcon from '@mui/icons-material/Room';
 import img from "../constants/index"
 import L from "leaflet";
 
 export default function Map({ coords, display_name }) {
   const { latitude, longitude } = coords;
+  console.log(latitude, longitude)
 
   const customIcon = new L.Icon({//creating a custom icon to use in Marker
     iconUrl: img.map,
@@ -24,6 +24,10 @@ export default function Map({ coords, display_name }) {
   return (
     <MapContainer
       classsName="map"
+      style={{
+        width: "100vw",
+        height: "100vh"
+      }}
       center={[latitude, longitude]}
       zoom={10}
       scrollWheelZoom={true}

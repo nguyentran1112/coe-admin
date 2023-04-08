@@ -1,5 +1,4 @@
 import React from 'react';
-
 import CloseIcon from '@mui/icons-material/Close';
 import Box from "@mui/material/Box";
 import {useSelector} from 'react-redux'
@@ -21,8 +20,7 @@ const UpdateInfo = ({changePopup, maintenanceId}) => {
   
   
   const items = selector?.employee?.listEmployee
-  
-  
+
   
   return(
     <React.Fragment>

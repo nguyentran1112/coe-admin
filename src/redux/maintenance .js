@@ -1,7 +1,9 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
+
 const initialState = {
   listMaintenance : null,
+  updateMaintenance: null
 };
 
 const maintenance  = createSlice({
@@ -11,6 +13,9 @@ const maintenance  = createSlice({
     getAllMaintenanceSuccess(state, action) {
       state.listMaintenance = action.payload
     },
+    updateMaintenanceSuccess(state, action) {
+      state.updateMaintenance = action.payload
+    }
     
   },
 });
@@ -32,6 +37,22 @@ export const getAllMaintenance =
     dispatch(getAllMaintenanceSuccess(res.data));
     
   };
+  export const updateMaintenance = 
+  ({token, maintenanceId, employeeId}) => 
+  async (dispatch) => {
+    const res = await axios.put(
+      `${process.env.REACT_APP_API_ENDPOINT}/maintenance/employee/receive/${maintenanceId}`,
+      {
+        headers: {
+          token: 'Bearer ' + token
+        },
+        data: {
+          employee: employeeId
+        }
+      }
+    )
+    dispatch(updateMaintenance(res.data))
+  }
 
 
 

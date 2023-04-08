@@ -10,7 +10,7 @@ import UpdateInfo from "../components/popup/UpdateInfo";
 const columns = [
   { field: "date", headerName: "Date Time", width: 130 },
   { field: "description", headerName: "Description", width: 180 },
-  { field: "startHour", headerName: "User Name", width: 130 },
+  { field: "startHour", headerName: "Start hour", width: 130 },
   { field: "phone", headerName: "Phone", width: 130 },
   { field: "note", headerName: "Note", width: 130 },
   { field: "address", headerName: "Address", width: 130 },
@@ -95,10 +95,10 @@ const Maintenance  = ({maintenance}) => {
             rowsPerPageOptions={[maintenanceList?.length]}
             //checkboxSelection
             getCellClassName={(params) => {
-              if (params.field === 'status' && params.value == -1) {
+              if (params.field === 'status' && params.value == "unassigned") {
                 return 'hot';
               }
-              else if ((params.field === 'status' && params.value ==  0)) {
+              else if ((params.field === 'status' && params.value ==  "assigned")) {
                 return 'cold'
               }
               

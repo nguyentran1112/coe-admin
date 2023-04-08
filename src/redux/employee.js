@@ -10,7 +10,7 @@ const employee = createSlice({
   reducers: {
     getAllEmployeeSuccess(state, action) {
       state.listEmployee = action.payload
-      //console.log(state.listEmployee);
+      console.log(state.listEmployee);
     },
     
   },

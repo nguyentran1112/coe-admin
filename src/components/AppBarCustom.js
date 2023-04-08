@@ -21,6 +21,7 @@ const pages = [
   { title: "Khách hàng", location: "/client" },
   { title: "Nhân viên", location: "/employee" },
   { title: "Tài chính", location: "/report" },
+  { title: "Map", location: "/map" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 

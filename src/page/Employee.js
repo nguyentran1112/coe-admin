@@ -16,6 +16,12 @@ const columns = [
     width: 90,
   },
   {
+    field: "address",
+    headerName: "Address",
+
+    width: 180,
+  },
+  {
     field: "id",
     headerName: "ID",
     description: "This column has a value getter and is not sortable.",
@@ -44,6 +50,7 @@ const Employee = ({employee}) => {
         phone: employee.phone,
         sex: employee.sex,
         id: employee._id,
+        address: employee.address
       });
     }));
     

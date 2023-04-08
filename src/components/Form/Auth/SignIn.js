@@ -55,7 +55,7 @@ const SignIn = ({ login }) => {
           </Box>
           <Button
             type="submit"
-            sx={{ my: 3, boxShadow: "1px 2px 9px #1976D2" }}
+            sx={{ my: 2, boxShadow: "1px 2px 9px #1976D2" }}
             variant="contained"
           >
             Đăng nhập

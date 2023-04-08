@@ -1,11 +1,12 @@
-import "./Map.css"
+
+import { Button } from "@mui/material";
 import Map from "../components/Map";
 import { useEffect, useState } from "react";
+import img from "../constants/index";
 export default function MapPage() {
-
   const [coords, setCorrds] = useState({
     latitude: "",
-    longitude: ""
+    longitude: "",
   });
   const [display_name, setName] = useState("");
   const [address, setAddress] = useState({});
@@ -23,7 +24,7 @@ export default function MapPage() {
       err.code === 1 || //if user denied accessing the location
       err.code === 2 || //for any internal errors
       err.code === 3 //error due to timeout
-    ) {     
+    ) {
       alert(err.message);
     } else {
       alert(err);
@@ -33,27 +34,36 @@ export default function MapPage() {
   const options = {
     enableHighAccuracy: true,
     maximumAge: 30000,
-    timeout: 27000
+    timeout: 27000,
   };
 
   //get current location when the app loads for the first time
   function getCurrentCityName(position) {
     setCorrds({
       latitude: position.coords.latitude,
-      longitude: position.coords.longitude
+      longitude: position.coords.longitude,
     });
+    console.log(coords.latitude,coords.longitude);
 
-    let url = "https://nominatim.openstreetmap.org/reverse?format=jsonv2" +
-      "&lat=" + coords.latitude + "&lon=" + coords.longitude;
-      
+    let url =
+      "https://nominatim.openstreetmap.org/reverse?format=jsonv2" +
+      "&lat=" +
+      coords.latitude +
+      "&lon=" +
+      coords.longitude;
+
     fetch(url, {
       method: "GET",
       mode: "cors",
       headers: {
-        "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
-      }
+        "Access-Control-Allow-Origin": "https://o2cj2q.csb.app",
+      },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.json()
+        //console.log(response.json)
+      })
+      
       .then((data) => setName(data.display_name));
   }
 
@@ -71,8 +81,8 @@ export default function MapPage() {
       method: "POST",
       mode: "cors",
       headers: {
-        "Access-Control-Allow-Origin": "https://o2cj2q.csb.app"
-      }
+        "Access-Control-Allow-Origin": "https://o2cj2q.csb.app",
+      },
     })
       .then((response) => {
         if (response.ok) {
@@ -80,13 +90,17 @@ export default function MapPage() {
         }
       })
       .then((data) => {
+        //console.log(data);
         setName(data[0].display_name);
         setCorrds({
           latitude: data[0].lat,
-          longitude: data[0].lon
+          longitude: data[0].lon,
         });
       })
-      .catch(() => error("Please Check your input"));
+      .catch((e) => {
+        console.log(e);
+        error("Please Check your input");
+      });
   }
 
   //set form input( data entered ) to state on form submit
@@ -106,36 +120,58 @@ export default function MapPage() {
 
   return (
     <div className="App">
-      <h1>Enter The address</h1>
+      <img
+              alt="logo"
+              src={img.logoCOE}
+              style={{ width: 50, height: 50 }}
+              loading="lazy"
+            />
       <section className="form-container">
         <form>
-          <label>street:</label>
+          <label
+            style={{
+              color: "#1976D2",
+              width: "150px",
+            }}
+          >
+            Tên đường:
+          </label>
           <input
             value={address.street}
-            placeholder="1234 abc street"
+            placeholder="Tên đường"
             onChange={update("street")}
             id="street"
             type="text"
           />
-          <label>city:</label>
+          <label style={{
+              color: "#1976D2",
+            }}>Thành phố/Tỉnh</label>
           <input
-            placeholder="Los Angeles"
+            style={{ width: "100px", padding: "2px", margin: "5px" }}
+            placeholder="Thành phố/Tỉnh"
             type="text"
             value={address.city}
             onChange={update("city")}
             id="city"
           />
           <br />
-          <label>State:</label>
+          <label style={{
+              color: "#1976D2",
+            }}>Quận/Huyện:</label>
           <input
-            placeholder="CA / California"
+            style={{ width: "100px", padding: "2px", margin: "5px" }}
+            placeholder="Quận/Huyện"
             type="text"
             value={address.state}
             onChange={update("state")}
             id="state"
           />
-          <label>zip code:</label>
+          <label
+          style={{
+            color: "#1976D2",
+          }}>Mã code:</label>
           <input
+            style={{ width: "100px", padding: "2px", margin: "5px" }}
             placeholder="91423"
             type="text"
             value={address.postalcode}
@@ -143,17 +179,30 @@ export default function MapPage() {
             id="postalcode"
           />
           <br />
-          <label>Country:</label>
+          <label
+          style={{
+            color: "#1976D2"
+          }}>Quốc gia:</label>
           <input
-            placeholder="USA"
+            style={{ width: "100px", padding: "2px", margin: "5px" }}
+            placeholder="Việt Nam"
             type="text"
             value={address.country}
             onChange={update("country")}
             id="country"
           />
           <br />
-
-          <button onClick={(e) => submitHandler(e)}>Search</button>
+          <Button
+          sx={{ mt: 3, boxShadow: "1px 2px 9px #1976D2" }}
+          variant="contained"
+            style={{
+              width: "100px",
+              margin: "10px",
+            }}
+            onClick={(e) => submitHandler(e)}
+          >
+            Tìm kiếm
+          </Button>
         </form>
       </section>
       <Map coords={coords} dispaly_name={display_name} />

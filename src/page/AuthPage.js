@@ -53,7 +53,6 @@ const AuthPage = ({ auth }) => {
           width: "100%",
         }}
         animationData={img.backgroundDot}
-        resizeMode="cover"
       />
     </>
   );
