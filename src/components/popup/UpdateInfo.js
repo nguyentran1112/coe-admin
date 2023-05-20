@@ -7,19 +7,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Button } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { updateMaintenance } from '../../redux/maintenance ';
 const UpdateInfo = ({changePopup, maintenanceId}) => {
   const selector = useSelector((state) => state)
   const closePopup = (bool) => {
     changePopup(bool)
   }
   const handleChange = (event) => {
-   
     setSelectEmployee(event.target.value);
   }
   const [selectEmployee, setSelectEmployee] = React.useState('')
   
   
   const items = selector?.employee?.listEmployee
+  const token = selector?.auth
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateMaintenance({token, maintenanceId, selectEmployee }))
+  };
 
   
   return(
@@ -42,7 +49,8 @@ const UpdateInfo = ({changePopup, maintenanceId}) => {
 >
   <CloseIcon onClick={() => closePopup(false)} style={{display: 'flex'}} />
   <div style={{fontSize: '18px', margin: '8px'}}>{`Cập nhật đơn bảo trì ${maintenanceId}`}</div>
-  <FormControl fullWidth sx={{mt: 2}} >
+  <form onSubmit={handleSubmit}>
+  <FormControl  fullWidth sx={{mt: 2}} >
         <InputLabel id="demo-simple-select-label">Nhân viên</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -64,6 +72,7 @@ const UpdateInfo = ({changePopup, maintenanceId}) => {
           >
             Cập nhật
           </Button>
+    </form>
   </Box>
   </React.Fragment>)
 };

@@ -20,7 +20,7 @@ const maintenance  = createSlice({
   },
 });
 
-const { getAllMaintenanceSuccess } = maintenance.actions;
+const { getAllMaintenanceSuccess, updateMaintenanceSuccess } = maintenance.actions;
 
 export const getAllMaintenance =
   ({token}) =>
@@ -51,7 +51,8 @@ export const getAllMaintenance =
         }
       }
     )
-    dispatch(updateMaintenance(res.data))
+    console.log(res.data)
+    dispatch(updateMaintenanceSuccess(res.data))
   }
 
 

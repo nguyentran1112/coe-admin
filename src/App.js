@@ -2,7 +2,7 @@ import './App.css';
 import Loading from './components/Loading';
 import { Route, Routes } from "react-router-dom";
 
-import { Home, AuthPage, Dashboard, NotFound, MapPage} from './page'
+import { Home, AuthPage, Dashboard, NotFound, MapPage, API} from './page'
 import Auth from './container/Auth';
 import Maintenance from './container/Maintenance';
 import Employee from './container/Employee';
@@ -21,6 +21,7 @@ function App() {
         <Route path='/client' element={<Client />}/>
         <Route path='/maintenance' element={<Maintenance />}/>
         <Route path='/map' element={<MapPage />}/>
+        <Route path='/api' element={<API />}/>
         <Route path='*' element={<NotFound />}/>
       </Routes>
     </div>

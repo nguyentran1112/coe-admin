@@ -12,5 +12,6 @@ export default {
   money: require("../assets/money.json"),
   rate: require("../assets/rating.json"),
   loading: require("../assets/loading.json"),
-  map: require("../assets/placeholder.png")
+  map: require("../assets/placeholder.png"),
+  api: require("../assets/API_page.jpg")
 };

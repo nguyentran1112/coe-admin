@@ -22,6 +22,7 @@ const pages = [
   { title: "Nhân viên", location: "/employee" },
   { title: "Tài chính", location: "/report" },
   { title: "Map", location: "/map" },
+  { title: "API", location: "/api" },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
