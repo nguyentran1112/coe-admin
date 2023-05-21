@@ -8,6 +8,7 @@ import store, {persistor} from "./redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Loading from "../src/components/Loading"
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -21,4 +22,5 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+serviceWorkerRegistration.unregister();
 reportWebVitals();
