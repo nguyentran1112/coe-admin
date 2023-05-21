@@ -22,5 +22,5 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
-serviceWorkerRegistration.unregister();
+serviceWorkerRegistration.register();
 reportWebVitals();

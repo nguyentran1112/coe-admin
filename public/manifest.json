@@ -1,5 +1,5 @@
 {
-  "name": "COE-ADMIN",  "short_name": "COE-ADMIN",  "theme_color": "#fff",  "background_color": "#fff",  "display": "standalone",  "scope": "/",  "start_url": "/",
+  "name": "COE-ADMIN",  "short_name": "COE-ADMIN",  "theme_color": "#fff",  "background_color": "#fff",  "display": "standalone",  "scope": "https://coe-admin.vercel.app/",  "start_url": "https://coe-admin.vercel.app/",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,5 +22,6 @@
       "sizes": "196x196",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "prefer_related_applications": false
 }
